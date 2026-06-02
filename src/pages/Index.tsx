@@ -3,73 +3,76 @@ import Icon from "@/components/ui/icon";
 
 const NAV_ITEMS = [
   { label: "Главная", href: "#home" },
-  { label: "Услуги", href: "#services" },
   { label: "Серверы", href: "#servers" },
   { label: "Новости", href: "#news" },
-  { label: "Связаться", href: "#contact" },
+  { label: "Магазин", href: "#contact" },
+  { label: "Discord", href: "#contact" },
 ];
 
-const SERVICES = [
-  { icon: "Zap", title: "Веб-разработка", desc: "Создаём мощные и быстрые веб-приложения с современным стеком технологий." },
-  { icon: "Shield", title: "Кибербезопасность", desc: "Защищаем ваш бизнес от угроз. Аудит, пентест, настройка систем безопасности." },
-  { icon: "Cpu", title: "Автоматизация", desc: "Автоматизируем процессы с помощью ИИ и скриптов. Экономим ваше время." },
-  { icon: "Globe", title: "Digital-маркетинг", desc: "SEO, контекстная реклама, аналитика и стратегии роста в сети." },
-  { icon: "Database", title: "Облачные решения", desc: "Проектируем облачную инфраструктуру. Масштабируемость и надёжность 24/7." },
-  { icon: "Layers", title: "UI/UX Дизайн", desc: "Создаём интерфейсы, которые интуитивно понятны и красивы." },
+const MODES = [
+  {
+    icon: "Leaf",
+    tag: "Онлайн",
+    title: "Vanilla+",
+    version: "1.20.4",
+    desc: "Классический выживач с небольшими улучшениями. Никакого pay-to-win — только честная игра, дружное комьюнити и хардкорный гринд.",
+    features: ["Grief Protection", "Экономика", "Клановая система", "Ежедневные ивенты"],
+    ip: "play.neonix.fun",
+    status: "online" as const,
+    players: "0/100",
+    color: "#39ff14",
+  },
+  {
+    icon: "Skull",
+    tag: "Скоро",
+    title: "Анархия",
+    version: "1.20.4",
+    desc: "Никаких правил. Никаких ограничений. Выживи любой ценой на сервере где закон — кулак сильнейшего. В разработке.",
+    features: ["Без модерации", "PvP везде", "Без варпов", "Хардкор-режим"],
+    ip: "—",
+    status: "maintenance" as const,
+    players: "—",
+    color: "#ff0080",
+  },
 ];
 
 const STATS = [
-  { value: "150+", label: "Проектов" },
-  { value: "8", label: "Лет опыта" },
-  { value: "98%", label: "Довольных клиентов" },
-  { value: "24/7", label: "Поддержка" },
-];
-
-type ServerStatus = "online" | "maintenance" | "offline";
-
-const SERVERS: { name: string; region: string; ping: number; players: string; status: ServerStatus }[] = [
-  { name: "EU-01 · Frankfurt", region: "Европа", ping: 12, players: "247/500", status: "online" },
-  { name: "EU-02 · Amsterdam", region: "Европа", ping: 18, players: "189/500", status: "online" },
-  { name: "RU-01 · Moscow", region: "Россия", ping: 8, players: "412/500", status: "online" },
-  { name: "RU-02 · SPB", region: "Россия", ping: 11, players: "301/500", status: "online" },
-  { name: "US-01 · New York", region: "США", ping: 94, players: "—", status: "maintenance" },
-  { name: "AS-01 · Singapore", region: "Азия", ping: 160, players: "54/200", status: "online" },
+  { value: "1", label: "Активный сервер" },
+  { value: "1.20.4", label: "Версия" },
+  { value: "24/7", label: "Аптайм" },
+  { value: "Free", label: "Вход бесплатный" },
 ];
 
 const NEWS = [
   {
-    date: "31 мая 2025",
-    tag: "Обновление",
-    title: "Запущен сезон 4 — новые карты и оружие",
-    desc: "В четвёртом сезоне добавлено 3 новых локации, 12 видов оружия и переработана система рейтинга.",
+    date: "2 июня 2025",
+    tag: "Запуск",
+    title: "Neonix Project — открытие серверов!",
+    desc: "Мы рады объявить об официальном открытии проекта. Сервер Vanilla+ уже доступен — заходи и стань первым!",
   },
   {
-    date: "20 мая 2025",
-    tag: "Техработы",
-    title: "Плановое обслуживание серверов EU-01 и RU-01",
-    desc: "Технические работы прошли успешно. Серверы обновлены до версии 3.8.1, улучшена стабильность.",
+    date: "1 июня 2025",
+    tag: "Анонс",
+    title: "Анархия — сервер в разработке",
+    desc: "Второй сервер Neonix — Анархия — уже в активной разработке. Следи за обновлениями, релиз скоро.",
   },
   {
-    date: "10 мая 2025",
+    date: "30 мая 2025",
     tag: "Событие",
-    title: "Двойной опыт — майский ивент",
-    desc: "С 10 по 20 мая все игроки получают двойной опыт и увеличенный дроп редких предметов.",
+    title: "Бонус за первый вход — стартовый кит",
+    desc: "Каждый новый игрок получает стартовый набор вещей. Заходи первым — забирай бонус!",
   },
   {
-    date: "1 мая 2025",
+    date: "28 мая 2025",
     tag: "Патч",
-    title: "Патч 3.7.5 — баланс и исправления",
-    desc: "Исправлены критические баги, переработан баланс нескольких персонажей, оптимизирован клиент.",
+    title: "Настройка плагинов и оптимизация",
+    desc: "Проведена финальная настройка всех плагинов, оптимизирован TPS сервера. Играть стало плавнее.",
   },
 ];
 
-const STATUS_CFG: Record<ServerStatus, { label: string; color: string; glow: string; dot: string }> = {
-  online:      { label: "Онлайн",        color: "text-emerald-400", glow: "shadow-[0_0_8px_#39ff14]", dot: "#39ff14" },
-  maintenance: { label: "Техработы",     color: "text-yellow-400",  glow: "shadow-[0_0_8px_#facc15]", dot: "#facc15" },
-  offline:     { label: "Оффлайн",       color: "text-red-400",     glow: "shadow-[0_0_8px_#f87171]", dot: "#f87171" },
-};
-
 const TAG_COLOR: Record<string, string> = {
+  "Запуск":     "border-cyan-500/40 text-cyan-400",
+  "Анонс":      "border-blue-500/40 text-blue-400",
   "Обновление": "border-cyan-500/40 text-cyan-400",
   "Техработы":  "border-yellow-500/40 text-yellow-400",
   "Событие":    "border-purple-500/40 text-purple-400",
@@ -104,7 +107,7 @@ export default function Index() {
     document.getElementById(href.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const onlineCount = SERVERS.filter((s) => s.status === "online").length;
+  const onlineCount = MODES.filter((s) => s.status === "online").length;
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden" style={{ fontFamily: "'Montserrat', sans-serif" }}>
@@ -167,7 +170,7 @@ export default function Index() {
           <div className="mt-4 pt-4 border-t border-white/5">
             <div className="flex items-center gap-2 mb-1">
               <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#39ff14", boxShadow: "0 0 6px #39ff14" }} />
-              <span className="text-[10px] text-emerald-400 tracking-widest">{onlineCount}/{SERVERS.length} серверов онлайн</span>
+              <span className="text-[10px] text-emerald-400 tracking-widest">{onlineCount}/{MODES.length} серверов онлайн</span>
             </div>
             <p className="text-[9px] text-gray-700 tracking-widest uppercase">Статус платформы: OK</p>
           </div>
@@ -182,7 +185,7 @@ export default function Index() {
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center gap-6">
           <span className="text-xl font-bold tracking-widest neon-text-cyan animate-flicker mr-auto" style={{ fontFamily: "'Oswald', sans-serif" }}>
-            NEON<span className="text-white">STUDIO</span>
+            NEONIX<span className="text-white"> PROJECT</span>
           </span>
           <nav className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
@@ -205,27 +208,41 @@ export default function Index() {
         <div className="max-w-5xl mx-auto px-6 text-center">
           <div className="animate-fade-up opacity-0" style={{ animationFillMode: "forwards" }}>
             <span className="inline-block text-xs font-medium tracking-[0.4em] uppercase text-cyan-500 mb-6 border border-cyan-500/30 px-4 py-2">
-              Цифровые решения нового поколения
+              Minecraft · Java Edition · 1.20.4
             </span>
           </div>
           <h1 className="text-6xl md:text-9xl font-bold leading-none mb-6 animate-fade-up opacity-0 delay-100" style={{ fontFamily: "'Oswald', sans-serif", animationFillMode: "forwards" }}>
-            <span className="block neon-text-cyan">МЫ</span>
-            <span className="block text-white">СОЗДАЁМ</span>
-            <span className="block" style={{ color: "#39ff14", textShadow: "0 0 20px #39ff14, 0 0 60px #39ff14" }}>БУДУЩЕЕ</span>
+            <span className="block neon-text-cyan">NEONIX</span>
+            <span className="block text-white">PROJECT</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-xl mx-auto mb-10 leading-relaxed animate-fade-up opacity-0 delay-300" style={{ animationFillMode: "forwards" }}>
-            Разрабатываем цифровые продукты, которые меняют индустрии. Технологии, дизайн и стратегия — всё в одном месте.
+            Неоновый майнкрафт-проект с уникальными режимами. Присоединяйся — это только начало.
           </p>
+
+          {/* IP block */}
+          <div className="animate-fade-up opacity-0 delay-400 flex flex-col items-center gap-3 mb-12" style={{ animationFillMode: "forwards" }}>
+            <div
+              className="flex items-center gap-4 px-6 py-3 border cursor-pointer group"
+              style={{ border: "1px solid rgba(0,255,255,0.3)", background: "rgba(0,255,255,0.04)" }}
+              onClick={() => navigator.clipboard?.writeText("play.neonix.fun")}
+            >
+              <Icon name="Server" size={16} className="text-cyan-400" />
+              <span className="font-mono text-cyan-300 text-lg tracking-widest">play.neonix.fun</span>
+              <Icon name="Copy" size={14} className="text-gray-600 group-hover:text-cyan-400 transition-colors" />
+            </div>
+            <span className="text-[10px] text-gray-700 tracking-widest uppercase">Нажми чтобы скопировать IP</span>
+          </div>
+
           <div className="flex items-center justify-center gap-4 animate-fade-up opacity-0 delay-400" style={{ animationFillMode: "forwards" }}>
             <button
-              onClick={() => scrollTo("#services")}
+              onClick={() => scrollTo("#servers")}
               className="px-8 py-3 font-medium text-sm tracking-widest uppercase text-black"
               style={{ background: "#00ffff", boxShadow: "0 0 20px #00ffff, 0 0 60px rgba(0,255,255,0.3)" }}
             >
-              Наши услуги
+              Выбрать сервер
             </button>
-            <button onClick={() => scrollTo("#contact")} className="neon-btn px-8 py-3 text-sm tracking-widest uppercase">
-              Связаться
+            <button onClick={() => scrollTo("#news")} className="neon-btn px-8 py-3 text-sm tracking-widest uppercase">
+              Новости
             </button>
           </div>
 
@@ -244,86 +261,86 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ─── SERVICES ─── */}
-      <section id="services" className="relative py-32 z-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
-            <span className="text-xs tracking-[0.4em] uppercase text-cyan-500 font-medium">Что мы делаем</span>
-            <h2 className="text-5xl md:text-7xl font-bold mt-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
-              <span className="text-white">НАШИ </span><span className="neon-text-cyan">УСЛУГИ</span>
-            </h2>
-            <div className="w-20 h-[1px] mt-4" style={{ background: "#00ffff", boxShadow: "0 0 10px #00ffff" }} />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
-            {SERVICES.map((service, i) => (
-              <div key={i} className="neon-card p-8 group cursor-pointer" style={{ background: "#0d0d0d" }}>
-                <div className="w-12 h-12 border border-cyan-500/30 flex items-center justify-center mb-6 group-hover:border-cyan-500 transition-colors group-hover:shadow-[0_0_15px_rgba(0,255,255,0.3)]">
-                  <Icon name={service.icon} size={20} className="text-cyan-400" fallback="Star" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                  {service.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{service.desc}</p>
-                <div className="mt-6 flex items-center gap-2 text-xs text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity tracking-widest uppercase">
-                  <span>Подробнее</span><Icon name="ArrowRight" size={12} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── SERVERS ─── */}
       <section id="servers" className="relative py-32 z-10">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="mb-16 flex items-end justify-between flex-wrap gap-4">
             <div>
-              <span className="text-xs tracking-[0.4em] uppercase text-cyan-500 font-medium">Инфраструктура</span>
+              <span className="text-xs tracking-[0.4em] uppercase text-cyan-500 font-medium">Режимы игры</span>
               <h2 className="text-5xl md:text-7xl font-bold mt-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                <span className="text-white">ОНЛАЙН </span><span className="neon-text-cyan">СЕРВЕРЫ</span>
+                <span className="text-white">НАШИ </span><span className="neon-text-cyan">СЕРВЕРЫ</span>
               </h2>
               <div className="w-20 h-[1px] mt-4" style={{ background: "#00ffff", boxShadow: "0 0 10px #00ffff" }} />
             </div>
             <div className="flex items-center gap-3 border border-emerald-500/20 px-4 py-2" style={{ background: "rgba(57,255,20,0.04)" }}>
               <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#39ff14", boxShadow: "0 0 8px #39ff14" }} />
-              <span className="text-xs text-emerald-400 tracking-widest uppercase">{onlineCount} серверов онлайн</span>
+              <span className="text-xs text-emerald-400 tracking-widest uppercase">{onlineCount} онлайн</span>
             </div>
           </div>
 
-          <div className="border border-white/5" style={{ background: "#0d0d0d" }}>
-            {/* Table header */}
-            <div className="grid grid-cols-5 px-6 py-3 border-b border-white/5 text-[10px] text-gray-600 tracking-[0.2em] uppercase">
-              <span>Сервер</span>
-              <span>Регион</span>
-              <span>Пинг</span>
-              <span>Игроки</span>
-              <span>Статус</span>
-            </div>
-            {SERVERS.map((server, i) => {
-              const cfg = STATUS_CFG[server.status];
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {MODES.map((mode, i) => {
+              const isOnline = mode.status === "online";
               return (
                 <div
                   key={i}
-                  className="grid grid-cols-5 px-6 py-4 border-b border-white/[0.03] items-center hover:bg-white/[0.02] transition-colors group cursor-pointer last:border-0"
+                  className="relative border p-8 overflow-hidden group transition-all duration-300"
+                  style={{
+                    background: "#0d0d0d",
+                    borderColor: isOnline ? "rgba(0,255,255,0.15)" : "rgba(255,0,128,0.15)",
+                    boxShadow: isOnline ? "inset 0 0 40px rgba(0,255,255,0.02)" : "inset 0 0 40px rgba(255,0,128,0.02)",
+                  }}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: cfg.dot, boxShadow: `0 0 6px ${cfg.dot}` }} />
-                    <span className="text-sm text-white font-medium">{server.name}</span>
+                  {/* Glow corner */}
+                  <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-20" style={{ background: mode.color }} />
+
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 border flex items-center justify-center" style={{ borderColor: `${mode.color}40`, background: `${mode.color}08` }}>
+                        <Icon name={mode.icon} size={24} style={{ color: mode.color }} fallback="Server" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <div className="w-1.5 h-1.5 rounded-full" style={{ background: mode.color, boxShadow: `0 0 6px ${mode.color}` }} />
+                          <span className="text-[10px] tracking-widest uppercase" style={{ color: mode.color }}>{mode.tag}</span>
+                        </div>
+                        <h3 className="text-3xl font-bold text-white" style={{ fontFamily: "'Oswald', sans-serif" }}>{mode.title}</h3>
+                      </div>
+                    </div>
+                    <span className="text-xs border px-2 py-1 text-gray-500 border-white/10">{mode.version}</span>
                   </div>
-                  <span className="text-xs text-gray-500">{server.region}</span>
-                  <span className="text-sm font-medium" style={{ color: server.ping < 30 ? "#39ff14" : server.ping < 80 ? "#facc15" : "#f87171" }}>
-                    {server.status === "maintenance" ? "—" : `${server.ping} мс`}
-                  </span>
-                  <span className="text-sm text-gray-400">{server.players}</span>
-                  <div className="flex items-center gap-2">
-                    <span className={`text-xs font-medium tracking-widest uppercase ${cfg.color}`}>{cfg.label}</span>
+
+                  <p className="text-gray-500 text-sm leading-relaxed mb-6">{mode.desc}</p>
+
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {mode.features.map((f) => (
+                      <span key={f} className="text-[10px] border border-white/8 px-2 py-1 text-gray-500 tracking-wider">{f}</span>
+                    ))}
+                  </div>
+
+                  <div className="border-t border-white/5 pt-5 flex items-center justify-between">
+                    {isOnline ? (
+                      <>
+                        <div>
+                          <p className="text-[10px] text-gray-600 tracking-widest uppercase mb-1">IP адрес</p>
+                          <p className="font-mono text-cyan-300 text-sm">{mode.ip}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-[10px] text-gray-600 tracking-widest uppercase mb-1">Игроки</p>
+                          <p className="text-sm font-medium" style={{ color: mode.color }}>{mode.players}</p>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex items-center gap-3 w-full">
+                        <Icon name="Clock" size={14} className="text-pink-500" />
+                        <span className="text-sm text-gray-500">Сервер в разработке — скоро открытие</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
             })}
           </div>
-
-          <p className="text-xs text-gray-700 tracking-widest mt-4 text-right">Обновлено: {new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" })}</p>
         </div>
       </section>
 
@@ -366,35 +383,40 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ─── CONTACT ─── */}
+      {/* ─── JOIN ─── */}
       <section id="contact" className="relative py-32 z-10">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <span className="text-xs tracking-[0.4em] uppercase text-cyan-500 font-medium">Готовы начать?</span>
+          <span className="text-xs tracking-[0.4em] uppercase text-cyan-500 font-medium">Присоединяйся</span>
           <h2 className="text-5xl md:text-7xl font-bold mt-3 mb-6" style={{ fontFamily: "'Oswald', sans-serif" }}>
-            <span className="text-white">СВЯЖИТЕСЬ </span><span className="neon-text-cyan">С НАМИ</span>
+            <span className="text-white">ВОЙТИ В </span><span className="neon-text-cyan">ИГРУ</span>
           </h2>
           <p className="text-gray-400 mb-12 max-w-lg mx-auto">
-            Расскажите о своём проекте — мы ответим в течение 24 часов.
+            Подключайся к серверу прямо сейчас или вступай в наш Discord, чтобы не пропустить анонсы и ивенты.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px mb-12 border border-white/5">
             {[
-              { icon: "Mail", label: "Email", value: "hello@neonstudio.ru" },
-              { icon: "Phone", label: "Телефон", value: "+7 (900) 000-00-00" },
-              { icon: "MapPin", label: "Офис", value: "Москва, Россия" },
+              { icon: "Server", label: "Java IP", value: "play.neonix.fun" },
+              { icon: "Hash", label: "Discord", value: "discord.gg/neonix" },
+              { icon: "BookOpen", label: "Версия", value: "1.20.4 Java" },
             ].map((c) => (
-              <div key={c.label} className="py-8 px-6 hover:bg-cyan-500/5 transition-colors group" style={{ background: "#0d0d0d" }}>
+              <div key={c.label} className="py-8 px-6 hover:bg-cyan-500/5 transition-colors group cursor-pointer" style={{ background: "#0d0d0d" }}>
                 <Icon name={c.icon} size={20} className="text-cyan-500 mx-auto mb-3 block" fallback="Info" />
                 <p className="text-xs text-gray-600 tracking-widest uppercase mb-2">{c.label}</p>
-                <p className="text-sm text-gray-300 group-hover:text-white transition-colors">{c.value}</p>
+                <p className="text-sm font-mono text-gray-300 group-hover:text-white transition-colors">{c.value}</p>
               </div>
             ))}
           </div>
-          <button
-            className="px-12 py-4 font-bold text-sm tracking-[0.2em] uppercase text-black animate-pulse-neon"
-            style={{ background: "#00ffff", fontFamily: "'Oswald', sans-serif" }}
-          >
-            Написать нам
-          </button>
+          <div className="flex items-center justify-center gap-4">
+            <button
+              className="px-10 py-4 font-bold text-sm tracking-[0.2em] uppercase text-black animate-pulse-neon"
+              style={{ background: "#00ffff", fontFamily: "'Oswald', sans-serif" }}
+            >
+              Вступить в Discord
+            </button>
+            <button className="neon-btn px-10 py-4 text-sm tracking-[0.15em] uppercase font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>
+              Скопировать IP
+            </button>
+          </div>
         </div>
       </section>
 
@@ -402,9 +424,9 @@ export default function Index() {
       <footer className="relative z-10 border-t border-white/5 py-8">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="text-lg font-bold tracking-widest neon-text-cyan animate-flicker" style={{ fontFamily: "'Oswald', sans-serif" }}>
-            NEON<span className="text-white">STUDIO</span>
+            NEONIX<span className="text-white"> PROJECT</span>
           </span>
-          <p className="text-xs text-gray-600 tracking-widest">© 2025 NEONSTUDIO. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+          <p className="text-xs text-gray-600 tracking-widest">© 2025 NEONIX PROJECT. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
           <div className="hidden md:flex gap-6">
             {NAV_ITEMS.map((item) => (
               <button key={item.href} onClick={() => scrollTo(item.href)} className="text-xs text-gray-600 hover:text-cyan-400 transition-colors tracking-widest uppercase">
