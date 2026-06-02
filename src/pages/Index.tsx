@@ -409,37 +409,101 @@ export default function Index() {
       {/* ─── NEWS ─── */}
       <section id="news" className="relative py-32 z-10">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
-            <span className="text-xs tracking-[0.4em] uppercase text-cyan-500 font-medium">Последние события</span>
-            <h2 className="text-5xl md:text-7xl font-bold mt-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
-              <span className="text-white">НОВОСТИ </span><span className="neon-text-cyan">ПРОЕКТА</span>
-            </h2>
-            <div className="w-20 h-[1px] mt-4" style={{ background: "#00ffff", boxShadow: "0 0 10px #00ffff" }} />
+          <div className="mb-12 flex items-end justify-between flex-wrap gap-4">
+            <div>
+              <span className="text-xs tracking-[0.4em] uppercase text-cyan-500 font-medium">Последние события</span>
+              <h2 className="text-5xl md:text-7xl font-bold mt-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                <span className="text-white">НОВОСТИ </span><span className="neon-text-cyan">ПРОЕКТА</span>
+              </h2>
+              <div className="w-20 h-[1px] mt-4" style={{ background: "#00ffff", boxShadow: "0 0 10px #00ffff" }} />
+            </div>
+            <button className="neon-btn px-5 py-2 text-xs tracking-widest uppercase flex items-center gap-2">
+              Все новости <Icon name="ArrowRight" size={12} />
+            </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {NEWS.map((item, i) => (
-              <div
-                key={i}
-                className="group border border-white/5 p-8 cursor-pointer overflow-hidden transition-all duration-300 hover:border-cyan-500/25 relative"
-                style={{ background: "#0d0d0d" }}
-              >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "linear-gradient(135deg, rgba(0,255,255,0.02) 0%, transparent 60%)" }} />
-                <div className="flex items-center gap-3 mb-5">
-                  <span className={`text-[10px] border px-2 py-0.5 tracking-widest uppercase ${TAG_COLOR[item.tag] ?? "border-gray-500/40 text-gray-400"}`}>
-                    {item.tag}
-                  </span>
-                  <span className="text-[10px] text-gray-600 tracking-widest">{item.date}</span>
+
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+            {/* Главная новость — большая карточка */}
+            <div
+              className="lg:col-span-3 group relative overflow-hidden cursor-pointer border border-white/5 hover:border-cyan-500/30 transition-all duration-300"
+              style={{ background: "#0d0d0d" }}
+            >
+              {/* Превью-заглушка */}
+              <div className="relative w-full h-52 overflow-hidden flex items-center justify-center" style={{ background: "linear-gradient(135deg, #0f1f0f 0%, #0a1a0a 100%)" }}>
+                <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 30% 50%, rgba(57,255,20,0.08) 0%, transparent 70%)" }} />
+                <div className="absolute inset-0 grid-bg opacity-40" />
+                <div className="relative flex flex-col items-center gap-3">
+                  <div className="w-16 h-16 border flex items-center justify-center" style={{ borderColor: "rgba(57,255,20,0.3)", background: "rgba(57,255,20,0.06)" }}>
+                    <Icon name="Rocket" size={28} className="text-emerald-400" />
+                  </div>
+                  <span className="text-[10px] tracking-widest text-emerald-500/60 uppercase">Neonix Project</span>
                 </div>
-                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors leading-snug" style={{ fontFamily: "'Oswald', sans-serif" }}>
-                  {item.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-                <div className="mt-6 flex items-center gap-2 text-xs text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity tracking-widest uppercase">
-                  <span>Читать</span><Icon name="ArrowRight" size={12} />
-                </div>
-                <div className="absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-500" style={{ background: "linear-gradient(90deg, #00ffff, transparent)" }} />
+                <div className="absolute bottom-0 left-0 right-0 h-16" style={{ background: "linear-gradient(to top, #0d0d0d, transparent)" }} />
               </div>
-            ))}
+
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className={`text-[10px] border px-2 py-0.5 tracking-widest uppercase ${TAG_COLOR[NEWS[0].tag] ?? "border-gray-500/40 text-gray-400"}`}>
+                    {NEWS[0].tag}
+                  </span>
+                  <span className="text-[10px] text-gray-600">{NEWS[0].date}</span>
+                </div>
+                <h3 className="text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors leading-snug mb-3" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                  {NEWS[0].title}
+                </h3>
+                <p className="text-gray-500 text-sm leading-relaxed mb-5">{NEWS[0].desc}</p>
+                <div className="flex items-center gap-2 text-xs text-cyan-500 tracking-widest uppercase">
+                  <span>Читать подробнее</span><Icon name="ArrowRight" size={12} />
+                </div>
+              </div>
+
+              <div className="absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-500" style={{ background: "linear-gradient(90deg, #00ffff, transparent)" }} />
+            </div>
+
+            {/* Список остальных новостей */}
+            <div className="lg:col-span-2 flex flex-col gap-0 border border-white/5" style={{ background: "#0d0d0d" }}>
+              {NEWS.slice(1).map((item, i) => {
+                const icons = ["Megaphone", "Gift", "Wrench"];
+                const iconColors = ["#60a5fa", "#a78bfa", "#9ca3af"];
+                return (
+                  <div
+                    key={i}
+                    className="group flex items-start gap-4 p-5 cursor-pointer hover:bg-white/[0.02] transition-colors relative border-b border-white/5 last:border-0"
+                  >
+                    {/* Иконка-превью */}
+                    <div
+                      className="flex-shrink-0 w-12 h-12 flex items-center justify-center border transition-colors group-hover:border-cyan-500/30"
+                      style={{ borderColor: `${iconColors[i]}20`, background: `${iconColors[i]}08` }}
+                    >
+                      <Icon name={icons[i]} size={18} style={{ color: iconColors[i] }} fallback="FileText" />
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className={`text-[9px] border px-1.5 py-0.5 tracking-widest uppercase flex-shrink-0 ${TAG_COLOR[item.tag] ?? "border-gray-500/40 text-gray-400"}`}>
+                          {item.tag}
+                        </span>
+                        <span className="text-[9px] text-gray-700 truncate">{item.date}</span>
+                      </div>
+                      <h4 className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors leading-snug mb-1" style={{ fontFamily: "'Oswald', sans-serif" }}>
+                        {item.title}
+                      </h4>
+                      <p className="text-[11px] text-gray-600 leading-relaxed line-clamp-2">{item.desc}</p>
+                    </div>
+
+                    <Icon name="ChevronRight" size={14} className="text-gray-700 flex-shrink-0 group-hover:text-cyan-500 transition-colors mt-1" />
+                  </div>
+                );
+              })}
+
+              {/* Подвал списка */}
+              <div className="p-4 border-t border-white/5 flex items-center justify-between mt-auto">
+                <span className="text-[10px] text-gray-700 tracking-widest uppercase">Все записи</span>
+                <button className="text-[10px] text-cyan-600 hover:text-cyan-400 tracking-widest uppercase transition-colors flex items-center gap-1">
+                  Смотреть <Icon name="ArrowRight" size={10} />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
