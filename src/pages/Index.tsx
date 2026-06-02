@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 
 const NAV_ITEMS = [
-  { label: "Главная", href: "#home" },
-  { label: "Серверы", href: "#servers" },
-  { label: "Новости", href: "#news" },
-  { label: "Магазин", href: "#contact" },
-  { label: "Discord", href: "#contact" },
+  { label: "Серверы",  href: "#servers", icon: "Server" },
+  { label: "Новости",  href: "#news",    icon: "Newspaper" },
+  { label: "Магазин",  href: "#contact", icon: "ShoppingBag" },
+  { label: "Discord",  href: "#contact", icon: "MessageCircle" },
 ];
 
 const MODES = [
@@ -37,10 +36,10 @@ const MODES = [
 ];
 
 const STATS = [
-  { value: "1", label: "Активный сервер" },
+  { value: "1",      label: "Активный сервер" },
   { value: "1.20.4", label: "Версия" },
-  { value: "24/7", label: "Аптайм" },
-  { value: "Free", label: "Вход бесплатный" },
+  { value: "24/7",   label: "Аптайм" },
+  { value: "Free",   label: "Вход бесплатный" },
 ];
 
 const NEWS = [
@@ -87,7 +86,7 @@ export default function Index() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-      const sections = ["home", "services", "servers", "news", "contact"];
+      const sections = ["home", "servers", "news", "contact"];
       for (const id of sections) {
         const el = document.getElementById(id);
         if (el) {
@@ -116,63 +115,131 @@ export default function Index() {
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none z-0" />
       <div className="fixed bottom-0 right-0 w-[600px] h-[400px] rounded-full bg-emerald-500/5 blur-[120px] pointer-events-none z-0" />
 
-      {/* ─── RIGHT HOVER DRAWER ─── */}
+      {/* ─── LEFT HOVER DRAWER ─── */}
       <div
         className="fixed top-1/2 -translate-y-1/2 z-50"
-        style={{ right: sideOpen ? 0 : "-220px", transition: "right 0.4s cubic-bezier(0.4,0,0.2,1)" }}
+        style={{ left: sideOpen ? 0 : "-210px", transition: "left 0.4s cubic-bezier(0.4,0,0.2,1)" }}
         onMouseEnter={() => setSideOpen(true)}
         onMouseLeave={() => setSideOpen(false)}
       >
-        {/* Peek tab */}
-        <div
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full flex flex-col items-center justify-center gap-1 px-2 py-4 cursor-pointer"
-          style={{
-            background: "#0d0d0d",
-            borderTop: "1px solid rgba(0,255,255,0.2)",
-            borderLeft: "1px solid rgba(0,255,255,0.2)",
-            borderBottom: "1px solid rgba(0,255,255,0.2)",
-            boxShadow: "-4px 0 20px rgba(0,255,255,0.08)",
-          }}
-        >
-          <div className="w-[2px] h-6 rounded" style={{ background: "#00ffff", boxShadow: "0 0 6px #00ffff" }} />
-          <div className="w-[2px] h-4 rounded bg-white/20 my-0.5" />
-          <div className="w-[2px] h-6 rounded" style={{ background: "#39ff14", boxShadow: "0 0 6px #39ff14" }} />
-          <span className="text-[8px] text-cyan-500/60 tracking-widest mt-2" style={{ writingMode: "vertical-rl" }}>МЕНЮ</span>
-        </div>
-
         {/* Panel */}
         <div
-          className="w-56 h-auto flex flex-col py-6 px-5 gap-2"
+          className="w-52 flex flex-col py-5 px-4 gap-1"
           style={{
-            background: "linear-gradient(135deg, #0d0d0d 0%, #111 100%)",
-            borderLeft: "1px solid rgba(0,255,255,0.18)",
-            borderTop: "1px solid rgba(0,255,255,0.1)",
-            borderBottom: "1px solid rgba(0,255,255,0.1)",
-            boxShadow: "-8px 0 40px rgba(0,255,255,0.08)",
+            background: "rgba(10,10,10,0.75)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            borderRight: "1px solid rgba(0,255,255,0.15)",
+            borderTop: "1px solid rgba(0,255,255,0.08)",
+            borderBottom: "1px solid rgba(0,255,255,0.08)",
+            boxShadow: "8px 0 40px rgba(0,255,255,0.06)",
           }}
         >
-          <p className="text-[9px] text-gray-600 tracking-[0.3em] uppercase mb-3">Навигация</p>
-          {NAV_ITEMS.map((item, i) => (
+          {/* Logo inside drawer */}
+          <button
+            onClick={() => scrollTo("#home")}
+            className="flex items-center gap-3 px-3 py-3 mb-3 border border-cyan-500/20 hover:border-cyan-500/40 transition-all group"
+            style={{ background: "rgba(0,255,255,0.04)" }}
+          >
+            <div className="w-8 h-8 flex items-center justify-center flex-shrink-0" style={{ border: "1px solid rgba(0,255,255,0.3)", background: "rgba(0,255,255,0.08)" }}>
+              <Icon name="Zap" size={14} className="text-cyan-400" />
+            </div>
+            <div className="text-left">
+              <p className="text-[11px] font-bold tracking-widest neon-text-cyan" style={{ fontFamily: "'Oswald', sans-serif" }}>NEONIX</p>
+              <p className="text-[9px] text-gray-500 tracking-widest">PROJECT</p>
+            </div>
+          </button>
+
+          <p className="text-[9px] text-gray-700 tracking-[0.3em] uppercase px-3 mb-1">Навигация</p>
+
+          {NAV_ITEMS.map((item) => (
             <button
-              key={item.href}
+              key={item.href + item.label}
               onClick={() => { scrollTo(item.href); setSideOpen(false); }}
-              className={`text-left px-3 py-2.5 text-xs font-medium tracking-widest uppercase transition-all duration-200 border border-transparent ${
+              className={`flex items-center gap-3 px-3 py-2.5 text-xs font-medium tracking-wider uppercase transition-all duration-200 border border-transparent rounded-none ${
                 activeSection === item.href.replace("#", "")
-                  ? "text-cyan-400 border-cyan-500/30 bg-cyan-500/5"
-                  : "text-gray-500 hover:text-cyan-300 hover:border-cyan-500/15 hover:bg-white/2"
+                  ? "text-cyan-400 border-cyan-500/25 bg-cyan-500/8"
+                  : "text-gray-500 hover:text-cyan-300 hover:border-cyan-500/15 hover:bg-white/3"
               }`}
             >
-              <span className="opacity-30 mr-2" style={{ fontFamily: "'Oswald', sans-serif" }}>0{i + 1}</span>
+              <Icon name={item.icon} size={14} className={activeSection === item.href.replace("#", "") ? "text-cyan-400" : "text-gray-600"} fallback="Circle" />
               {item.label}
             </button>
           ))}
 
-          <div className="mt-4 pt-4 border-t border-white/5">
-            <div className="flex items-center gap-2 mb-1">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#39ff14", boxShadow: "0 0 6px #39ff14" }} />
-              <span className="text-[10px] text-emerald-400 tracking-widest">{onlineCount}/{MODES.length} серверов онлайн</span>
+          <div className="mt-4 pt-4 border-t border-white/5 px-3">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full animate-pulse flex-shrink-0" style={{ background: "#39ff14", boxShadow: "0 0 6px #39ff14" }} />
+              <span className="text-[10px] text-emerald-400 tracking-widest">{onlineCount}/{MODES.length} онлайн</span>
             </div>
-            <p className="text-[9px] text-gray-700 tracking-widest uppercase">Статус платформы: OK</p>
+          </div>
+        </div>
+
+        {/* Peek tab — справа от панели */}
+        <div
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full flex flex-col items-center justify-center gap-1 px-2 py-5 cursor-pointer"
+          style={{
+            background: "rgba(10,10,10,0.75)",
+            backdropFilter: "blur(16px)",
+            borderTop: "1px solid rgba(0,255,255,0.15)",
+            borderRight: "1px solid rgba(0,255,255,0.15)",
+            borderBottom: "1px solid rgba(0,255,255,0.15)",
+            boxShadow: "4px 0 20px rgba(0,255,255,0.06)",
+          }}
+        >
+          <div className="w-[2px] h-5 rounded" style={{ background: "#00ffff", boxShadow: "0 0 6px #00ffff" }} />
+          <div className="w-[2px] h-3 rounded bg-white/15 my-0.5" />
+          <div className="w-[2px] h-5 rounded" style={{ background: "#39ff14", boxShadow: "0 0 6px #39ff14" }} />
+          <span className="text-[7px] text-cyan-500/50 tracking-widest mt-2" style={{ writingMode: "vertical-rl" }}>МЕНЮ</span>
+        </div>
+      </div>
+
+      {/* ─── NEWS RIGHT PANEL ─── */}
+      <div className="fixed top-1/2 -translate-y-1/2 right-0 z-40 hidden lg:flex flex-col"
+        style={{
+          width: "280px",
+          maxHeight: "70vh",
+        }}
+      >
+        <div
+          className="flex flex-col h-full overflow-hidden"
+          style={{
+            background: "rgba(10,10,10,0.7)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            borderLeft: "1px solid rgba(0,255,255,0.12)",
+            borderTop: "1px solid rgba(0,255,255,0.08)",
+            borderBottom: "1px solid rgba(0,255,255,0.08)",
+            boxShadow: "-8px 0 40px rgba(0,255,255,0.05)",
+          }}
+        >
+          <div className="px-4 py-3 border-b border-white/5 flex items-center gap-2 flex-shrink-0">
+            <Icon name="Newspaper" size={13} className="text-cyan-500" />
+            <span className="text-[10px] text-gray-500 tracking-[0.25em] uppercase font-medium">Последние новости</span>
+          </div>
+          <div className="overflow-y-auto flex-1 py-2">
+            {NEWS.map((item, i) => (
+              <div
+                key={i}
+                className="px-4 py-3 border-b border-white/[0.03] hover:bg-cyan-500/4 transition-colors cursor-pointer group last:border-0"
+              >
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className={`text-[9px] border px-1.5 py-0.5 tracking-widest uppercase ${TAG_COLOR[item.tag] ?? "border-gray-500/40 text-gray-400"}`}>
+                    {item.tag}
+                  </span>
+                  <span className="text-[9px] text-gray-700">{item.date}</span>
+                </div>
+                <p className="text-xs text-gray-300 group-hover:text-white transition-colors leading-snug font-medium mb-1">
+                  {item.title}
+                </p>
+                <p className="text-[10px] text-gray-600 leading-relaxed line-clamp-2">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="px-4 py-2.5 border-t border-white/5 flex-shrink-0">
+            <button onClick={() => scrollTo("#news")} className="text-[10px] text-cyan-600 hover:text-cyan-400 tracking-widest uppercase transition-colors flex items-center gap-1">
+              Все новости <Icon name="ArrowRight" size={10} />
+            </button>
           </div>
         </div>
       </div>
@@ -190,7 +257,7 @@ export default function Index() {
           <nav className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => (
               <button
-                key={item.href}
+                key={item.href + item.label}
                 onClick={() => scrollTo(item.href)}
                 className={`neon-btn px-4 py-2 text-xs font-medium tracking-widest uppercase ${
                   activeSection === item.href.replace("#", "") ? "neon-btn-active" : ""
@@ -235,11 +302,11 @@ export default function Index() {
 
           <div className="flex items-center justify-center gap-4 animate-fade-up opacity-0 delay-400" style={{ animationFillMode: "forwards" }}>
             <button
-              onClick={() => scrollTo("#servers")}
+              onClick={() => scrollTo("#contact")}
               className="px-8 py-3 font-medium text-sm tracking-widest uppercase text-black"
               style={{ background: "#00ffff", boxShadow: "0 0 20px #00ffff, 0 0 60px rgba(0,255,255,0.3)" }}
             >
-              Выбрать сервер
+              Вступить в Discord
             </button>
             <button onClick={() => scrollTo("#news")} className="neon-btn px-8 py-3 text-sm tracking-widest uppercase">
               Новости
@@ -291,9 +358,7 @@ export default function Index() {
                     boxShadow: isOnline ? "inset 0 0 40px rgba(0,255,255,0.02)" : "inset 0 0 40px rgba(255,0,128,0.02)",
                   }}
                 >
-                  {/* Glow corner */}
                   <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-20" style={{ background: mode.color }} />
-
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center gap-4">
                       <div className="w-14 h-14 border flex items-center justify-center" style={{ borderColor: `${mode.color}40`, background: `${mode.color}08` }}>
@@ -309,15 +374,12 @@ export default function Index() {
                     </div>
                     <span className="text-xs border px-2 py-1 text-gray-500 border-white/10">{mode.version}</span>
                   </div>
-
                   <p className="text-gray-500 text-sm leading-relaxed mb-6">{mode.desc}</p>
-
                   <div className="flex flex-wrap gap-2 mb-8">
                     {mode.features.map((f) => (
                       <span key={f} className="text-[10px] border border-white/8 px-2 py-1 text-gray-500 tracking-wider">{f}</span>
                     ))}
                   </div>
-
                   <div className="border-t border-white/5 pt-5 flex items-center justify-between">
                     {isOnline ? (
                       <>
@@ -354,7 +416,6 @@ export default function Index() {
             </h2>
             <div className="w-20 h-[1px] mt-4" style={{ background: "#00ffff", boxShadow: "0 0 10px #00ffff" }} />
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {NEWS.map((item, i) => (
               <div
@@ -376,7 +437,7 @@ export default function Index() {
                 <div className="mt-6 flex items-center gap-2 text-xs text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity tracking-widest uppercase">
                   <span>Читать</span><Icon name="ArrowRight" size={12} />
                 </div>
-                <div className="absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-500" style={{ background: "linear-gradient(90deg, #00ffff, transparent)", boxShadow: "0 0 8px #00ffff" }} />
+                <div className="absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-500" style={{ background: "linear-gradient(90deg, #00ffff, transparent)" }} />
               </div>
             ))}
           </div>
@@ -395,9 +456,9 @@ export default function Index() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px mb-12 border border-white/5">
             {[
-              { icon: "Server", label: "Java IP", value: "play.neonix.fun" },
-              { icon: "Hash", label: "Discord", value: "discord.gg/neonix" },
-              { icon: "BookOpen", label: "Версия", value: "1.20.4 Java" },
+              { icon: "Server",   label: "Java IP",  value: "play.neonix.fun" },
+              { icon: "Hash",     label: "Discord",  value: "discord.gg/neonix" },
+              { icon: "BookOpen", label: "Версия",   value: "1.20.4 Java" },
             ].map((c) => (
               <div key={c.label} className="py-8 px-6 hover:bg-cyan-500/5 transition-colors group cursor-pointer" style={{ background: "#0d0d0d" }}>
                 <Icon name={c.icon} size={20} className="text-cyan-500 mx-auto mb-3 block" fallback="Info" />
@@ -413,7 +474,11 @@ export default function Index() {
             >
               Вступить в Discord
             </button>
-            <button className="neon-btn px-10 py-4 text-sm tracking-[0.15em] uppercase font-bold" style={{ fontFamily: "'Oswald', sans-serif" }}>
+            <button
+              className="neon-btn px-10 py-4 text-sm tracking-[0.15em] uppercase font-bold"
+              style={{ fontFamily: "'Oswald', sans-serif" }}
+              onClick={() => navigator.clipboard?.writeText("play.neonix.fun")}
+            >
               Скопировать IP
             </button>
           </div>
@@ -429,7 +494,7 @@ export default function Index() {
           <p className="text-xs text-gray-600 tracking-widest">© 2025 NEONIX PROJECT. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
           <div className="hidden md:flex gap-6">
             {NAV_ITEMS.map((item) => (
-              <button key={item.href} onClick={() => scrollTo(item.href)} className="text-xs text-gray-600 hover:text-cyan-400 transition-colors tracking-widest uppercase">
+              <button key={item.href + item.label} onClick={() => scrollTo(item.href)} className="text-xs text-gray-600 hover:text-cyan-400 transition-colors tracking-widest uppercase">
                 {item.label}
               </button>
             ))}
