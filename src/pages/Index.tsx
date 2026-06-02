@@ -16,7 +16,7 @@ const MODES = [
     version: "1.20.4",
     desc: "Классический выживач без pay-to-win. Честная игра, дружное комьюнити и хардкорный гринд.",
     features: ["Grief Protection", "Экономика", "Кланы", "Ивенты"],
-    ip: "play.neonix.fun",
+    ip: "game.neonix.fun",
     status: "online" as const,
     players: 0,
     maxPlayers: 100,
@@ -118,7 +118,7 @@ export default function Index() {
   };
 
   const copyIP = () => {
-    navigator.clipboard?.writeText("play.neonix.fun");
+    navigator.clipboard?.writeText("game.neonix.fun");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -222,9 +222,7 @@ export default function Index() {
             ))}
           </nav>
 
-          <button className="btn-primary px-5 py-2 text-sm hidden md:block">
-            Вступить в Discord
-          </button>
+
         </div>
       </header>
 
@@ -243,10 +241,9 @@ export default function Index() {
           </div>
 
           {/* Title */}
-          <h1 className="font-black leading-none mb-6 animate-fade-up delay-100"
-            style={{ fontFamily: "'Oswald',sans-serif", fontSize: "clamp(3rem,10vw,7rem)", animationFillMode: "forwards", opacity: 0 }}>
-            <span className="text-white">NEONIX</span>
-            <br />
+          <h1 className="font-black leading-none mb-6 animate-fade-up delay-100 whitespace-nowrap"
+            style={{ fontFamily: "'Oswald',sans-serif", fontSize: "clamp(2rem,6vw,4rem)", animationFillMode: "forwards", opacity: 0 }}>
+            <span className="text-white">NEONIX </span>
             <span style={{ background: "linear-gradient(135deg,#a78bfa,#7c4dfd,#5b2be8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               PROJECT
             </span>
@@ -268,7 +265,7 @@ export default function Index() {
               }}
             >
               <Icon name="Server" size={16} className="text-violet-400" />
-              <span className="font-mono text-violet-200 text-base font-semibold tracking-widest">play.neonix.fun</span>
+              <span className="font-mono text-violet-200 text-base font-semibold tracking-widest">game.neonix.fun</span>
               <div className="flex items-center gap-1 ml-2">
                 <Icon name={copied ? "Check" : "Copy"} size={14} className={copied ? "text-green-400" : "text-violet-500"} />
                 <span className="text-xs text-violet-500">{copied ? "Скопировано!" : "Копировать"}</span>
@@ -278,9 +275,9 @@ export default function Index() {
 
           {/* Buttons */}
           <div className="flex items-center justify-center gap-3 mb-16 animate-fade-up delay-400" style={{ animationFillMode: "forwards", opacity: 0 }}>
-            <button className="btn-primary px-8 py-3 text-sm flex items-center gap-2">
-              <Icon name="MessageCircle" size={16} />
-              Вступить в Discord
+            <button className="btn-primary px-8 py-3 text-sm flex items-center gap-2" onClick={copyIP}>
+              <Icon name="Copy" size={16} />
+              {copied ? "Скопировано!" : "Скопировать IP"}
             </button>
             <button className="btn-ghost px-8 py-3 text-sm flex items-center gap-2" onClick={() => scrollTo("#servers")}>
               <Icon name="Server" size={16} />
@@ -490,16 +487,16 @@ export default function Index() {
                   </span>
                 </h2>
                 <p className="text-[#8b87a8] text-sm leading-relaxed max-w-md">
-                  Сервер Vanilla+ уже открыт. Подключайся через Java клиент или вступи в наш Discord, чтобы быть в курсе всех событий.
+                  Сервер Vanilla+ уже открыт. Подключайся через Java клиент на <span className="text-violet-300 font-mono">game.neonix.fun</span> или переходи на сайт <span className="text-violet-300 font-mono">neonix.fun</span>.
                 </p>
               </div>
 
               <div className="flex flex-col gap-3 w-full md:w-auto">
                 <div className="grid grid-cols-1 gap-3">
                   {[
-                    { icon: "Server",    label: "Java IP",   value: "play.neonix.fun", click: copyIP },
-                    { icon: "Hash",      label: "Discord",   value: "discord.gg/neonix", click: undefined },
-                    { icon: "BookOpen",  label: "Версия",    value: "1.20.4 Java", click: undefined },
+                    { icon: "Globe",     label: "Сайт",      value: "neonix.fun",      click: undefined },
+                    { icon: "Server",    label: "Java IP",   value: "game.neonix.fun", click: copyIP },
+                    { icon: "BookOpen",  label: "Версия",    value: "1.20.4 Java",     click: undefined },
                   ].map((c) => (
                     <button
                       key={c.label}
@@ -520,12 +517,8 @@ export default function Index() {
                 </div>
 
                 <div className="flex gap-3 mt-2">
-                  <button className="btn-primary flex-1 py-3 text-sm flex items-center justify-center gap-2">
-                    <Icon name="MessageCircle" size={16} />
-                    Discord
-                  </button>
-                  <button className="btn-ghost flex-1 py-3 text-sm" onClick={copyIP}>
-                    {copied ? "✓ Скопировано" : "Копировать IP"}
+                  <button className="btn-primary flex-1 py-3 text-sm" onClick={copyIP}>
+                    {copied ? "✓ Скопировано!" : "Скопировать IP"}
                   </button>
                 </div>
               </div>
